@@ -2,7 +2,7 @@
 
 ## Table of Contents
 
-- [Libraries & Frameworks Used](#Libraries & Frameworks Used)
+- [Libraries & Frameworks Used]
 
 ## Libraries & Frameworks Used
 
@@ -13,9 +13,9 @@
 
 <img src="./screenshots/image1.PNG">&ensp;
 
-<img src="./screenshots/image2.PNG">&ensp;
+<img src="./screenshots/image4.PNG">&ensp;
 
-<img src="./screenshots/image3.PNG">&ensp;
+<img src="./screenshots/image5.PNG">&ensp;
 
 ## Developed By
 

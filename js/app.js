@@ -1,15 +1,22 @@
-/*
- * Create a list that holds all of your cards
- */
+let sec = 0;
+let minute;
+let second;
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+function time1(
+  secs //to pad 0 in secs
+) {
+  return secs > 9 ? secs : "0" + secs;
+}
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+let set = setInterval(function() //function for time
+{
+  sec++;
+  second = document.getElementById("seconds").innerHTML = time1(sec % 60);
+  minute = document.getElementById("minutes").innerHTML = time1(
+    parseInt(sec / 60)
+  );
+}, 1000);
+
 function shuffle(array) {
   var currentIndex = array.length,
     temporaryValue,
@@ -68,6 +75,7 @@ var temp;
 var myvalue;
 var mov = 0;
 let time;
+let myvar;
 
 // creating cards!
 const container = document.querySelector(".deck");
@@ -85,10 +93,14 @@ for (let i = 0; i < cardList.length; i++) {
     createcards.classList.remove("show");
     createcards.classList.remove("match");
     createcards.classList.remove("disable");
+    sec = -1;
+    shuffle(cardList);
     basic();
   });
   createcards.addEventListener("click", function() {
     if (opencards.length === 1) {
+      myvar = opencards;
+
       moves123();
       star123();
       opencards.push(this);
@@ -110,16 +122,17 @@ for (let i = 0; i < cardList.length; i++) {
       } else {
         console.log("not matched");
         createcards.classList.add("animated", "swing", "mismatch");
-        opencards[0].classList.add("animated", "swing", "mismatch");
+        myvar[0].classList.add("animated", "swing", "mismatch");
+        opencards.pop();
 
         setTimeout(function() {
           createcards.classList.remove("open", "show", "disable", "mismatch");
-          opencards[0].classList.remove("open", "show", "disable", "mismatch");
+          myvar[0].classList.remove("open", "show", "disable", "mismatch");
           createcards.classList.remove("animated", "swing");
           opencards[0].classList.remove("animated", "swing");
           opencards.pop();
           opencards.pop();
-        }, 700);
+        }, 300);
       }
     } else {
       moves123();
@@ -158,9 +171,6 @@ function star123() {
   if (mov > 30) {
     star2.style.visibility = "hidden";
   }
-  if (mov > 40) {
-    star3.style.visibility = "hidden";
-  }
 }
 
 //function to display the stars.
@@ -185,6 +195,7 @@ function basic() {
 //function to display the popup.
 function won() {
   document.getElementById("total").innerHTML = mov;
+  document.getElementById("timings").innerHTML = minute + ":" + second;
   var disp = document.querySelector("#sCount");
   if (mov <= 20) {
     disp.textContent = "3";
@@ -195,6 +206,7 @@ function won() {
   } else {
     disp.textContent = "0";
   }
+  clearInterval(set);
   var hide = document.querySelector(".container");
   hide.style.opacity = "0.6";
   var pop = document.querySelector(".popup");
